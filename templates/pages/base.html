@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/output.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  </head>
+
+  <body class="flex flex-col min-h-screen font-sans">
+    <!-- TOP NAVIGATION BAR -->
+    {% include "pages/topbar.html" %}
+    
+    <main class="bg-sky-50">
+      <div class="min-h-screen items-center p-5">
+        {% block content %}
+    <!-- Child templates will replace this -->
+        {% endblock %}
+      </div>
+    </main>
+
+  </body>
+</html> 

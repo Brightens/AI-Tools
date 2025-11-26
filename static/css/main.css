@@ -1,0 +1,93 @@
+.cancel-btn {
+  border: 2px solid #f43f5e;
+  background-color: #f43f5e;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background-color: #be123c;
+}
+
+.main-btn {
+  border: 2px solid #3B82F6;
+  background-color: #3B82F6;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.main-btn:hover {
+  background-color: #2563EB;
+}
+
+.navigate-btn {
+  border: 2px solid #10b981;
+  background-color: #10b981;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navigate-btn:hover {
+  background-color: #047857;
+}
+
+.edit-btn {
+  border: 2px solid #f59e0b;
+  background-color: #f59e0b;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.edit-btn:hover {
+  background-color: #b45309;
+}
+
+@media (max-width: 640px) {
+  .main-btn,
+  .navigate-btn,
+  .cancel-btn,
+  .edit-btn {
+    font-size: 0.875rem;
+    padding: 0.4rem 0.75rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .main-btn,
+  .navigate-btn,
+  .cancel-btn,
+  .edit-btn {
+    font-size: 0.95rem;
+    padding: 0.45rem 0.9rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .main-btn,
+  .navigate-btn,
+  .cancel-btn,
+  .edit-btn {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+}

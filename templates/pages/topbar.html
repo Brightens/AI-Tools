@@ -1,0 +1,35 @@
+<header class="flex items-center justify-between p-4 bg-stone-300 text-black border-b border-gray-300 relative z-50">
+
+  <!-- LEFT: Logo -->
+  <div class="flex-1">
+    <a href="/" class="inline-block">
+      <h1 class="text-2xl font-semibold bg-gradient-to-r from-[#13679A] to-[#E63946] bg-clip-text text-transparent">
+        AI Tools
+      </h1>
+    </a>
+  </div>
+
+  <!-- CENTER: Tasks dropdown -->
+  <div class="flex-1 flex justify-center gap-x-3">
+    <div class="relative group">
+      <a href="/"><button class="navigate-btn font-medium">
+        Home
+      </button></a>
+    </div>
+
+    <div class="relative group">
+      <button class="navigate-btn font-medium">
+        Tasks
+      </button>
+
+      <!-- Dropdown -->
+      <div class="absolute left-1/2 -translate-x-1/2 top-full hidden w-40 bg-white border border-gray-300 rounded-lg shadow-lg group-hover:block">
+        <a href="/web-scrape" class="block px-4 py-2 hover:bg-gray-100 rounded-lg">Web Scrape</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: empty placeholder (keeps center centered) -->
+  <div class="flex-1"></div>
+
+</header>

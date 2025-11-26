@@ -1,0 +1,95 @@
+{% extends "pages/base.html" %}
+
+{% block content %}
+
+<div id="container"
+     class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+
+  <!-- TITLE -->
+  <h1 class="text-3xl font-bold text-slate-900">
+    Create Your Endorsement Flyer
+  </h1>
+  <p class="mt-2 text-slate-600">
+    Turn any message into a clean, share-ready flyer that works both online and offline.
+  </p>
+
+  <!-- PREVIEW BOX -->
+  <div class="mt-6">
+    <div class="rounded-xl overflow-hidden shadow border border-gray-100 bg-slate-100">
+      <div class="p-6">
+        <h2 class="text-xl font-semibold text-slate-800">Sample Flyer</h2>
+        <p class="text-slate-600 mt-2">
+          This is how your flyer can look once you create it — simple, modern, and clear.
+        </p>
+      </div>
+      <div class="bg-slate-300 h-48 flex items-center justify-center text-slate-700 text-sm">
+        (Preview Image Placeholder)
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES ROW -->
+  <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+
+    <!-- Card 1 -->
+    <div class="p-4 rounded-lg border border-gray-200 shadow-sm bg-slate-50">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 flex items-center justify-center bg-blue-100 text-blue-600 rounded-lg">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"
+               viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M12 8v8m-4-4h8" />
+          </svg>
+        </div>
+        <div>
+          <div class="font-semibold">Ready Templates</div>
+          <p class="text-sm text-slate-600">Start fast with clean templates.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="p-4 rounded-lg border border-gray-200 shadow-sm bg-slate-50">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 flex items-center justify-center bg-green-100 text-green-600 rounded-lg">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"
+               viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <div>
+          <div class="font-semibold">Offline Friendly</div>
+          <p class="text-sm text-slate-600">Works without internet.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="p-4 rounded-lg border border-gray-200 shadow-sm bg-slate-50">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 flex items-center justify-center bg-purple-100 text-purple-600 rounded-lg">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"
+               viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M3 7h18M3 12h18M3 17h18" />
+          </svg>
+        </div>
+        <div>
+          <div class="font-semibold">Share-Ready</div>
+          <p class="text-sm text-slate-600">Easy to distribute anywhere.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA BUTTON -->
+  <div class="mt-10 flex justify-end">
+    <button class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition">
+      Start Creating
+    </button>
+  </div>
+
+</div>
+
+{% endblock %}
