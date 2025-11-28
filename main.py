@@ -8,7 +8,7 @@ from fastapi.responses import (
 from fastapi.staticfiles import StaticFiles
 
 from routers import base_router
-from routers import scrape_router
+from routers import pandas_router
 
 async def forbidden_error(request: Request, exc: Exception):
     return JSONResponse(status_code=403, content={"detail": "Forbidden"})
@@ -28,6 +28,6 @@ app = FastAPI(
 })
 
 app.include_router(base_router)
-app.include_router(scrape_router)
+app.include_router(pandas_router)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
