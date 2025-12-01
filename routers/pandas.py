@@ -25,7 +25,7 @@ async def web_scrape_page(
     URL paste page.
     """
     return TEMPLATES.TemplateResponse(
-        "pages/scrape/web-scrape.html",
+        "pages/pandas/web-scrape.html",
         {
             "request": request,
         },
