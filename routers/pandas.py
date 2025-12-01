@@ -5,13 +5,14 @@ from fastapi import (
 )
 from fastapi.responses import StreamingResponse
 
-from bs4 import BeautifulSoup
-
 import pandas as pd
 
 import io
 import requests
 
+from .utils.pandas_utils import (
+    parse_url_to_name,
+)
 from settings import TEMPLATES
 
 router = APIRouter(prefix="/pandas", tags=["pandas"])
@@ -39,8 +40,13 @@ async def web_scrape_export(
     """
     URL JSON format to CSV.
     """
-    data = requests.get(url_page).json().get("products")
+    file_name = parse_url_to_name(url_page)
+
+    json_data = requests.get(url_page).json()
+    first_key = next(iter(json_data))
+    data = json_data[first_key]
     df = pd.DataFrame(data)
+    df = df.astype(str).replace({r"[\[\]\{\}'\"]": ""}, regex=True)
 
     csv_buffer = io.StringIO()
     df.to_csv(csv_buffer, index=False)
@@ -50,6 +56,6 @@ async def web_scrape_export(
         io.BytesIO(csv_buffer.getvalue().encode("utf-8")),
         media_type="text/csv",
         headers={
-            "Content-Disposition": "attachment; filename=output.csv"
+            "Content-Disposition": f"attachment; filename={file_name}.csv"
         }
     )
