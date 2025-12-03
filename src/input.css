@@ -1,3 +1,4 @@
 @import "tailwindcss";
 
-@source "../templates";
+/* Scan ALL html files inside templates AND subfolders */
+@source "../templates/**/*.html";
