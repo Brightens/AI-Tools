@@ -2,11 +2,15 @@ from fastapi import (
     APIRouter, 
     Depends, 
     Form, 
-    Request
+    Request,
+    Query
 )
 from fastapi.responses import (
     RedirectResponse, 
 )
+
+from scipy import stats
+
 from sqlmodel import (
     or_,
     select
@@ -15,7 +19,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from datetime import datetime
+import random
 
+from data import CARDS
 from database import get_session
 from models.models import (
     Card,
@@ -36,36 +42,82 @@ async def list_series(
     """
     list of pokemon card sets
     """
-    query = await db.execute(select(Set).options(selectinload(Set.era)))
-    sets = query.scalars().all()
+    set_query = await db.execute(select(Set).options(selectinload(Set.era)))
+    sets = set_query.scalars().all()
+
+    era_query = await db.execute(select(Era))
+    eras = era_query.scalars().all()
 
     return TEMPLATES.TemplateResponse(
         "pages/pokemon/home.html",
         {
             "request": request,
+            "eras": eras,
             "sets": sets,
         },
     )
 
 
-@router.get("/{gen}/{id}")
-async def list_sets(
+@router.get("/eras/{era}/{id}")
+async def list_cards(
     request: Request,
-    gen: str,
+    era: str,
     id: int,
     db: AsyncSession = Depends(get_session)
 ):
     """
     List the cards of the set (API is set to "Era/Series/Set".)
     """
-    query = await db.execute(select(Set))
-    sets = query.scalars().all()
+    cards_query = await db.execute(select(Card).filter(Card.set_id == id)
+        .options(selectinload(Card.rarity)))
+    cards  = cards_query.scalars().all()
 
     return TEMPLATES.TemplateResponse(
-        "pages/pokemon/home.html",
+        "pages/pokemon/set_cards.html",
         {
             "request": request,
-            "sets": sets,
+            "cards": cards,
+            "id": id
+        },
+    )
+
+
+@router.get("/cards/{id}/open")
+async def open_pack(
+    request: Request,
+    id: int,
+    quantity: int = Query(..., ge=1, le=5),
+    db: AsyncSession = Depends(get_session)
+):
+    """
+    Display obtained random cards
+    """
+    cards = []
+    COMMONS = 7
+    RARES = 3
+
+    common_query = await db.execute(select(Card).filter(Card.set_id == id, Card.rarity_id <= 2)
+        .options(selectinload(Card.rarity)))
+    common_cards  = common_query.scalars().all()
+
+    rare_query = await db.execute(select(Card).filter(Card.set_id == id, Card.rarity_id >= 3)
+        .options(selectinload(Card.rarity)))
+    rare_cards  = rare_query.scalars().all()
+
+    for _ in range(quantity):
+        # commons
+        for _ in range(COMMONS):
+            cards.append(random.choice(common_cards))
+
+        # rares
+        for _ in range(RARES):
+            cards.append(random.choice(rare_cards))
+
+    return TEMPLATES.TemplateResponse(
+        "pages/pokemon/cards.html",
+        {
+            "request": request,
+            "cards": cards
         },
     )
 

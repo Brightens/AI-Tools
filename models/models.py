@@ -55,7 +55,6 @@ class Card(SQLModel, table=True):
     name: str = Field(max_length=100, index=True)
     rarity_id: int = Field(foreign_key="rarities.id", index=True)
     image_url: Optional[str] = Field(max_length=500, default=None)
-    created_at: datetime = Field(default_factory=datetime.utcnow)
     
     # Relationships
     set: Set = Relationship(back_populates="cards")

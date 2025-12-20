@@ -2,3 +2,18 @@
 
 /* Scan ALL html files inside templates AND subfolders */
 @source "../templates/**/*.html";
+
+@keyframes scale {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-scale {
+  animation: scale 0.2s ease-out;
+}
