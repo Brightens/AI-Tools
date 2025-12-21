@@ -62,6 +62,22 @@
   background-color: #b45309;
 }
 
+button:disabled {
+  border: 2px solid #9ca3af;
+  background-color: #9ca3af;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* prevent hover override */
+button:disabled:hover {
+  background-color: #9ca3af;
+}
+
 @media (max-width: 640px) {
   .main-btn,
   .navigate-btn,

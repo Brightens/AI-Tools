@@ -5,7 +5,7 @@
 <div id="container"
      class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
 
-  <div class="flex justify-end bg-slate-300 rounded-lg p-4 mb-4">
+  <div class="flex justify-end bg-slate-500 rounded-lg p-4 mb-4">
     <h1 class="text-3xl font-bold">
       
     </h1>
@@ -54,6 +54,7 @@
         </h2>
 
         <input
+          id="packQuantity"
           name="quantity"
           type="number"
           min="1"
@@ -70,7 +71,7 @@
         <button
           type="button"
           id="cancelBtn"
-          class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300"
+          class="cancel-btn"
         >
           Cancel
         </button>
@@ -78,7 +79,7 @@
         <button
           type="submit"
           id="confirmBtn"
-          class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
+          class="navigate-btn"
         >
           Open
         </button>
@@ -89,22 +90,32 @@
 </div>
 
 <script>
-  const openBtn = document.getElementById("openPackBtn");
-  const overlay = document.getElementById("modalOverlay");
-  const cancelBtn = document.getElementById("cancelBtn");
+  document.addEventListener("DOMContentLoaded", function () {
+    const openBtn = document.getElementById("openPackBtn");
+    const overlay = document.getElementById("modalOverlay");
+    const cancelBtn = document.getElementById("cancelBtn");
+    const packQuantity = document.getElementById("packQuantity");
+    const cardCount = {{ cards_count }};
 
-  openBtn.addEventListener("click", () => {
-    overlay.classList.remove("hidden");
-  });
+    if (cardCount === 0) {
+      openBtn.classList.remove("main-btn");
+      openBtn.disabled = true;
+    }
 
-  cancelBtn.addEventListener("click", () => {
-    packQuantity.value= "";
-    overlay.classList.add("hidden");
-  });
+    openBtn.addEventListener("click", () => {
+      if (openBtn.disabled) return;
+      overlay.classList.remove("hidden");
+    });
 
-  overlay.addEventListener("click", () => {
-    packQuantity.value= "";
-    overlay.classList.add("hidden");
+    cancelBtn.addEventListener("click", () => {
+      packQuantity.value= "";
+      overlay.classList.add("hidden");
+    });
+
+    overlay.addEventListener("click", () => {
+      packQuantity.value= "";
+      overlay.classList.add("hidden");
+    });
   });
 </script>
 

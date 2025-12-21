@@ -77,6 +77,7 @@ async def list_cards(
         {
             "request": request,
             "cards": cards,
+            "cards_count": len(cards),
             "id": id
         },
     )
@@ -112,6 +113,7 @@ async def open_pack(
         # rares
         for _ in range(RARES):
             cards.append(random.choice(rare_cards))
+
 
     return TEMPLATES.TemplateResponse(
         "pages/pokemon/cards.html",
