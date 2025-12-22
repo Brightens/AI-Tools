@@ -9,8 +9,6 @@ from fastapi.responses import (
     RedirectResponse, 
 )
 
-from scipy import stats
-
 from sqlmodel import (
     or_,
     select
@@ -19,6 +17,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from datetime import datetime
+from typing import Optional
 import random
 
 from data import CARDS
@@ -105,6 +104,9 @@ async def open_pack(
         .options(selectinload(Card.rarity)))
     rare_cards  = rare_query.scalars().all()
 
+    if not common_cards or not rare_cards:
+        return RedirectResponse(url="/pokemon", status_code=302)
+    
     for _ in range(quantity):
         # commons
         for _ in range(COMMONS):
@@ -113,7 +115,6 @@ async def open_pack(
         # rares
         for _ in range(RARES):
             cards.append(random.choice(rare_cards))
-
 
     return TEMPLATES.TemplateResponse(
         "pages/pokemon/cards.html",
@@ -127,6 +128,7 @@ async def open_pack(
 @router.get("/register")
 async def registration_form(
     request: Request,
+    msg: Optional[str] ="",
     db: AsyncSession = Depends(get_session)
 ):
     """
@@ -138,8 +140,9 @@ async def registration_form(
     return TEMPLATES.TemplateResponse(
         "pages/pokemon/register.html",
         {
-            "request": request,
-            "eras": eras,
+            "request": request, 
+            "eras": eras, 
+            "msg": msg, 
         },
     )
 

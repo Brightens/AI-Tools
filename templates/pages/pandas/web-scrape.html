@@ -4,8 +4,16 @@
 
 <div id="containerCsv"
      class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+  
+  {% if msg %}
+  <div class="mb-4 rounded-md border border-red-500 bg-red-100 px-4 py-3">
+    <p class="text-sm font-semibold text-red-800">
+      {{ msg }}
+    </p>
+  </div>
+  {% endif %}
 
-  <form action="/pandas/web-scrape-to-csv" method="POST">
+  <form method="POST">
     <div class="mb-4">
       <label class="block mb-1 text-gray-700 font-medium">Paste URL</label>
       <input 
@@ -17,7 +25,16 @@
       >
     </div>
     <div class="flex justify-end gap-x-3">
-      <button class="main-btn">
+      <button
+      class="main-btn"
+      formaction="/ai/transform"
+      >
+        Transform
+      </button>
+      <button 
+      class="main-btn"
+      formaction="/pandas/web-scrape-to-csv"
+      >
         CSV
       </button>
     </div>

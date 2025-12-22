@@ -7,10 +7,13 @@ from fastapi.responses import (
 )
 from fastapi.staticfiles import StaticFiles
 
+from starlette.middleware.sessions import SessionMiddleware
+
 from contextlib import asynccontextmanager
 
 from database import init_db
 from routers import (
+    ai_router,
     base_router,
     pandas_router,
     pokemon_router
@@ -35,7 +38,7 @@ async def lifespan(app: FastAPI):
     # --- Shutdown ---
     print("Shutting down...")
 
-    
+
 app = FastAPI(
     exception_handlers={
     403: forbidden_error,
@@ -44,7 +47,12 @@ app = FastAPI(
 },
     lifespan=lifespan
 )
+app.add_middleware(
+    SessionMiddleware,
+    secret_key="super-secret-key"
+)
 
+app.include_router(ai_router)
 app.include_router(base_router)
 app.include_router(pandas_router)
 app.include_router(pokemon_router)

@@ -7,6 +7,7 @@ from fastapi.responses import StreamingResponse
 
 import pandas as pd
 
+from typing import Optional
 import io
 import requests
 
@@ -15,11 +16,13 @@ from .utils.pandas_utils import (
 )
 from settings import TEMPLATES
 
+
 router = APIRouter(prefix="/pandas", tags=["pandas"])
 
 @router.get("/web-scrape")
 async def web_scrape_page(
     request: Request,
+    msg: Optional[str] = "",
 ):
     """
     URL paste page.
@@ -28,6 +31,7 @@ async def web_scrape_page(
         "pages/pandas/web-scrape.html",
         {
             "request": request,
+            "msg": msg
         },
     )
 
